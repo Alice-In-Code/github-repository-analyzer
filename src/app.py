@@ -1,10 +1,17 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
     return render_template("index.html")
+
+
+@app.route("/analyze", methods=["POST"])
+def analyze():
+    repository = request.form.get("repository")
+
+    return f"Repository submitted: {repository}"
 
 
 if __name__ == "__main__":
