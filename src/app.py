@@ -2,27 +2,29 @@
 Application entry point for the GitHub Repository Analyzer.
 """
 
-from flask import Flask, render_template, request, abort
+from flask import (
+    Flask,
+    render_template,
+    request,
+    abort
+)
 from flask.typing import ResponseReturnValue
 
 from werkzeug.exceptions import BadRequest, NotFound
 
 from src.services.github_api import get_repository
 
+from src.routes.home import home_blueprint
+
 app = Flask(__name__)
 
 
+# Register route blueprints.
+
+app.register_blueprint(home_blueprint) # Home blueprint
+
+
 # Routes
-@app.route("/")
-def home() -> str:
-    """
-    Render the homepage.
-
-    Returns:
-        Rendered homepage template.
-    """
-    return render_template("index.html")
-
 
 @app.route("/analyze", methods=["POST"])
 def analyze() -> ResponseReturnValue:
