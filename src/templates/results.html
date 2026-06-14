@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Repository Results</title>
+</head>
+<body>
+
+    <h1>Repository Analysis</h1>
+
+    <h2>{{ repository.name }}</h2>
+
+    <p>
+        <strong>Description:</strong>
+        {{ repository.description }}
+    </p>
+
+    <p>
+        <strong>Stars:</strong>
+        {{ repository.stargazers_count }}
+    </p>
+
+    <p>
+        <strong>Forks:</strong>
+        {{ repository.forks_count }}
+    </p>
+
+    <a href="/">Analyze Another Repository</a>
+
+</body>
+</html>
