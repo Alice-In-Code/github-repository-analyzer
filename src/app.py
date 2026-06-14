@@ -15,6 +15,7 @@ from werkzeug.exceptions import BadRequest, NotFound
 from src.services.github_api import get_repository
 
 from src.routes.home import home_blueprint
+from src.routes.analyze import analyze_blueprint
 
 app = Flask(__name__)
 
@@ -22,39 +23,7 @@ app = Flask(__name__)
 # Register route blueprints.
 
 app.register_blueprint(home_blueprint) # Home blueprint
-
-
-# Routes
-
-@app.route("/analyze", methods=["POST"])
-def analyze() -> ResponseReturnValue:
-    """
-    Retrieve repository information and display results.
-
-    Returns:
-        Rendered results page.
-    """
-
-    repository_name = request.form.get("repository", "").strip()
-
-    if not repository_name:
-        abort(
-            400,
-            description="Invalid repository name."
-        )
-
-    repository = get_repository(repository_name)
-
-    if repository is None:
-        abort(
-            404,
-            description=f'Repository "{repository_name}" could not be found.'
-        )
-
-    return render_template(
-        "results.html",
-        repository=repository
-    )
+app.register_blueprint(analyze_blueprint) # Analyze blueprint
 
 
 # Error handlers
