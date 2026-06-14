@@ -11,6 +11,7 @@ from src.services.github_api import get_repository
 
 app = Flask(__name__)
 
+
 # Routes
 @app.route("/")
 def home() -> str:
@@ -69,12 +70,34 @@ def handle_bad_request(error: BadRequest) -> ResponseReturnValue:
         Rendered 400 error page.
     """
 
-    return(
+    return (
         render_template(
             "errors/400.html",
             error_description=error.description
         ),
         400
+    )
+
+
+@app.errorhandler(NotFound)
+def handle_not_found(error: NotFound) -> ResponseReturnValue:
+    """
+    Render the not found page.
+
+    Args:
+        error:
+            Raised Flask exception.
+
+    Return:
+        Rendered 404 error page.
+    """
+
+    return (
+        render_template(
+            "errors/404.html",
+            error_description=error.description
+        ),
+        404
     )
 
 
