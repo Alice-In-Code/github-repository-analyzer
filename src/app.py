@@ -13,10 +13,10 @@ from src.routes.analyze import analyze_blueprint
 app = Flask(__name__)
 
 
-# Register route blueprints.
+# Register application route blueprints.
 
-app.register_blueprint(home_blueprint) # Home blueprint
-app.register_blueprint(analyze_blueprint) # Analyze blueprint
+app.register_blueprint(home_blueprint)
+app.register_blueprint(analyze_blueprint)
 
 
 # Register application error handlers.
