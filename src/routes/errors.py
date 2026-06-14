@@ -44,7 +44,7 @@ def handle_not_found(error: NotFound) -> ResponseReturnValue:
         error:
             Raised Flask exception.
 
-    Return:
+    Returns:
         Rendered 404 error page.
     """
 
