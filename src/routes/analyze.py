@@ -12,7 +12,7 @@ from flask import (
 )
 from flask.typing import ResponseReturnValue
 
-from src.services.github_api import get_repository
+from services.github.repository_api import get_repository
 
 
 # Blueprints
