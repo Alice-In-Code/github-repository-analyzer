@@ -1,35 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Repository Results</title>
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='css/styles.css') }}"
-    >
-</head>
-<body>
+{% extends "base.html" %}
 
-    <h1>Repository Analysis</h1>
+{% block title %}
+    Repository Analysis
+{% endblock %}
 
-    <h2>{{ repository.name }}</h2>
+{% block content %}
 
-    <p>
-        <strong>Description:</strong>
-        {{ repository.description }}
-    </p>
+<h1>Repository Analysis</h1>
 
-    <p>
-        <strong>Stars:</strong>
-        {{ repository.stargazers_count }}
-    </p>
+<h2>{{ repository.name }}</h2>
 
-    <p>
-        <strong>Forks:</strong>
-        {{ repository.forks_count }}
-    </p>
+<p>
+    <strong>Description:</strong>
+    {{ repository.description }}
+</p>
 
-    <a href="/">Analyze Another Repository</a>
+<p>
+    <strong>Stars:</strong>
+    {{ repository.stargazers_count }}
+</p>
 
-</body>
-</html>
+<p>
+    <strong>Forks:</strong>
+    {{ repository.forks_count }}
+</p>
+
+<a href="/">Analyze Another Repository</a>
+
+{% endblock %}
