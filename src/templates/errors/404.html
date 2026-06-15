@@ -1,19 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Repository Not Found</title>
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='css/styles.css') }}"
-    >
-</head>
-<body>
+{% extends "base.html" %}
 
-    <h1>404 - Not Found</h1>
+{% block title %}
+    Repository Not Found
+{% endblock %}
 
-    <p>{{ error_description }}</p>
+{% block content %}
 
-    <a href="/">Return Home</a>
-</body>
-</html>
+<h1>404 - Not Found</h1>
+
+<p>{{ error_description }}</p>
+
+<a href="/">Return Home</a>
+
+{% endblock %}

@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Bad Request</title>
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='css/styles.css') }}"
-    >
-</head>
-<body>
+{% extends "base.html" %}
 
-    <h1>400 - Bad Request</h1>
+{% block title %}
+    Bad Request
+{% endblock %}
 
-    <p>{{ error_description }}</p>
+{% block content %}
 
-    <a href="/">Return Home</a>
+<h1>400 - Bad Request</h1>
 
-</body>
-</html>
+<p>{{ error_description }}</p>
+
+<a href="/">Return Home</a>
+
+{% endblock %}

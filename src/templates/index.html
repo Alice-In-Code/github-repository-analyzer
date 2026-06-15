@@ -1,34 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>GitHub Repository Analyzer</title>
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='css/styles.css') }}"
-    >
-</head>
-<body>
+{% extends "base.html" %}
 
-    <h1>GitHub Repository Analyzer</h1>
+{% block title %}
+    GitHub Repository Analyzer
+{% endblock %}
 
-    <p>
-        Enter a GitHub repository in the format:
-        <strong>owner/repository</strong>
-    </p>
+{% block content %}
 
-    <form action="/analyze" method="POST">
-        <input
+<h1>GitHub Repository Analyzer</h1>
+
+<p>
+    Enter a GitHub repository in the format:
+    <strong>owner/repository</strong>
+</p>
+
+<form action="/analyze" method="POST">
+    <input
             type="text"
             name="repository"
             placeholder="owner/repository"
             required
-        >
+    >
 
-        <button type="submit">
-            Analyze Repository
-        </button>
-    </form>
+    <button type="submit">
+        Analyze Repository
+    </button>
+</form>
 
-</body>
-</html>
+{% endblock %}
