@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>GitHub Repository Analyzer</title>
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/styles.css') }}"
+    >
 </head>
 <body>
 
     <h1>GitHub Repository Analyzer</h1>
 
-    <p>Enter a GitHub repository to analyze.</p>
+    <p>
+        Enter a GitHub repository in the format:
+        <strong>owner/repository</strong>
+    </p>
 
     <form action="/analyze" method="POST">
         <input
