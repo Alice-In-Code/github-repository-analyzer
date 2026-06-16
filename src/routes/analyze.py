@@ -12,8 +12,9 @@ from flask import (
 )
 from flask.typing import ResponseReturnValue
 
-from src.services.github_api import get_repository
-
+from src.services.github.repository_api import get_repository
+from src.services.github.repository_input import parse_repository_input
+from src.services.github.repository_normalizer import RepositoryNormalizationError
 
 # Blueprints
 
@@ -31,13 +32,19 @@ def analyze() -> ResponseReturnValue:
         Rendered results page.
     """
 
-    repository_name = request.form.get("repository", "").strip()
+    repository_name = request.form.get("repository")
 
     if not repository_name:
         abort(
             400,
-            description="Invalid repository name."
+            description="Repository input is required."
         )
+
+    try:
+        repository_name = parse_repository_input(repository_name)
+
+    except RepositoryNormalizationError as e:
+        abort(400, description=str(e))
 
     repository = get_repository(repository_name)
 
