@@ -36,7 +36,15 @@ class RepositoryNormalizer:
         if cls.OWNER_REPO_REGEX.match(value):
             return value
 
-        if value.startswith("github.com/"):
+        if value.startswith(
+                (
+                    "github.com/",
+                    "www.github.com/",
+                )
+        ) or value in (
+            "github.com",
+            "www.github.com"
+        ):
             value = f"https://{value}"
 
         if value.startswith(("http://", "https://")):

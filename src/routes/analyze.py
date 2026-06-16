@@ -32,7 +32,10 @@ def analyze() -> ResponseReturnValue:
         Rendered results page.
     """
 
-    repository_name = request.form.get("repository")
+    repository_name = request.form.get(
+        "repository",
+        "",
+    ).strip()
 
     if not repository_name:
         abort(
