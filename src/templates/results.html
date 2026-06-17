@@ -1,30 +1,73 @@
 {% extends "base.html" %}
 
 {% block title %}
+
     Repository Analysis
+
 {% endblock %}
+
+
+{% block css %}
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/results.css') }}"
+    >
+
+{% endblock %}
+
 
 {% block content %}
 
-<h1>Repository Analysis</h1>
+<h1>
+    Repository Analysis
+</h1>
 
-<h2>{{ repository.name }}</h2>
+
+<h2>
+    {{ repository.name }}
+</h2>
+
 
 <p>
-    <strong>Description:</strong>
+
+    <strong>
+        Description:
+    </strong>
+
     {{ repository.description }}
+
 </p>
+
 
 <p>
     <strong>Stars:</strong>
     {{ repository.stargazers_count }}
 </p>
 
+
 <p>
-    <strong>Forks:</strong>
+    <strong>
+        Forks:
+    </strong>
+
     {{ repository.forks_count }}
+
 </p>
 
-<a href="/">Analyze Another Repository</a>
+<a href="/">
+
+    Analyze Another Repository
+
+</a>
+
+{% endblock %}
+
+
+{% block javascript %}
+
+    <script
+        src="{{ url_for('static', filename='js/results.js') }}">
+    </script>
 
 {% endblock %}

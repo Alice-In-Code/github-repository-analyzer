@@ -1,19 +1,43 @@
 {% extends "base.html" %}
 
+
 {% block title %}
-    GitHub Repository Analyzer
+
+GitHub Repository Analyzer
+
 {% endblock %}
+
+
+{% block css %}
+
+<link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/home.css') }}"
+>
+
+{% endblock %}
+
 
 {% block content %}
 
 <h1>GitHub Repository Analyzer</h1>
 
+
 <p>
     Enter a GitHub repository in the format:
-    <strong>owner/repository</strong>
+
+    <strong>
+        owner/repository
+    </strong>
+
 </p>
 
-<form action="/analyze" method="POST">
+
+<form
+        action="/analyze"
+        method="POST"
+>
+
     <input
             type="text"
             name="repository"
@@ -21,9 +45,21 @@
             required
     >
 
+
     <button type="submit">
         Analyze Repository
     </button>
+
 </form>
+
+{% endblock %}
+
+
+{% block javascript %}
+
+<script
+    src="{{ url_for('static', filename='js/home.js') }}"
+>
+</script>
 
 {% endblock %}
