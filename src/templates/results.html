@@ -19,47 +19,54 @@
 
 {% block content %}
 
-<h1>
-    Repository Analysis
-</h1>
+<div class="results-layout">
 
 
-<h2>
-    {{ repository.name }}
-</h2>
+    {% include "components/owner_panel.html" %}
 
 
-<p>
-
-    <strong>
-        Description:
-    </strong>
-
-    {{ repository.description }}
-
-</p>
+    <main class="analysis-panel">
 
 
-<p>
-    <strong>Stars:</strong>
-    {{ repository.stargazers_count }}
-</p>
+        <section class="repository-header">
 
 
-<p>
-    <strong>
-        Forks:
-    </strong>
+            <h1 class="repository-title">
 
-    {{ repository.forks_count }}
+                {{ repository.full_name }}
 
-</p>
+            </h1>
 
-<a href="/">
 
-    Analyze Another Repository
 
-</a>
+            <p class="repository-description">
+
+                {{ repository.description or "No description provided." }}
+
+            </p>
+
+
+        </section>
+
+
+        <section class="dashboard-grid">
+
+            {% include "components/cards/languages_card.html" %}
+
+            {% include "components/cards/metrics_card.html" %}
+
+            {% include "components/cards/health_card.html" %}
+
+            {% include "components/cards/insights_card.html" %}
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
 
 {% endblock %}
 
@@ -67,7 +74,8 @@
 {% block javascript %}
 
     <script
-        src="{{ url_for('static', filename='js/results.js') }}">
+        src="{{ url_for('static', filename='js/results.js') }}"
+    >
     </script>
 
 {% endblock %}
