@@ -19,34 +19,33 @@
 
 {% block content %}
 
-<div class="results-layout">
+<div class="results-page">
 
 
-    {% include "components/owner_panel.html" %}
+    <section class="repository-header">
 
 
-    <main class="analysis-panel">
+        <h1 class="repository-title">
+
+            {{ repository.full_name }}
+
+        </h1>
 
 
-        <section class="repository-header">
+        <p class="repository-description">
+
+            {{ repository.description or "No description provided." }}
+
+        </p>
 
 
-            <h1 class="repository-title">
-
-                {{ repository.full_name }}
-
-            </h1>
+    </section>
 
 
-
-            <p class="repository-description">
-
-                {{ repository.description or "No description provided." }}
-
-            </p>
+    <div class="results-layout">
 
 
-        </section>
+        {% include "components/owner_panel.html" %}
 
 
         <section class="dashboard-grid">
@@ -62,7 +61,7 @@
         </section>
 
 
-    </main>
+    </div>
 
 
 </div>

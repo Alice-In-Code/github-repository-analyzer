@@ -1,3 +1,427 @@
 /*
-    Repository analysis page styles.
+    Repository analysis dashboard.
  */
+
+
+
+/* Main Layout */
+
+.results-page {
+
+    width: 100%;
+    height: 100%;
+
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.results-layout {
+
+    width: 100%;
+
+    flex: 1;
+
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns: clamp(220px, 22vw, 300px) 1fr;
+
+    gap: 1.5rem;
+
+}
+
+
+
+/* Owner Panel */
+
+.owner-panel {
+
+    background-color: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 16px;
+
+    padding: 1.5rem;
+
+    height: 100%;
+
+    overflow: hidden;
+
+    position: relative;
+
+}
+
+
+.owner-panel-header {
+
+    display: flex;
+
+    justify-content: flex-end;
+}
+
+
+.owner-toggle {
+
+    background-color: var(--surface-secondary);
+
+    color: var(--text-primary);
+
+    border: none;
+
+    border-radius: 8px;
+
+    padding: 0.5rem 0.8rem;
+
+    cursor: pointer;
+
+}
+
+
+.owner-content {
+
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    text-align: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+}
+
+
+.owner-avatar {
+
+    width: clamp(70px, 10vh, 130px);
+    height: clamp(70px, 10vh, 130px);
+
+    border-radius: 50%;
+
+    background-color: var(--border);
+
+    margin: 1rem auto;
+
+    display: block;
+
+}
+
+
+.owner-name {
+
+    margin-bottom: 1rem;
+
+}
+
+
+.owner-bio {
+
+    color: var(--text-secondary);
+
+    max-height: 20vh;
+
+    margin-bottom: 1.5rem;
+
+    overflow: hidden;
+
+}
+
+
+.owner-stats {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1rem;
+
+}
+
+
+.owner-stat {
+
+    background-color: var(--surface-secondary);
+
+    border-radius: 10px;
+
+    padding: 1rem;
+
+    display: flex;
+
+    justify-content: space-between;
+
+}
+
+
+
+/* Repository Header */
+
+
+.repository-header {
+
+    text-align: center;
+
+    margin-bottom: 1rem;
+
+    flex-shrink: 0;
+
+}
+
+
+.repository-title {
+
+    font-size: 2rem;
+
+    margin-bottom: 0.75rem;
+
+}
+
+
+.repository-description {
+
+    color: var(--text-secondary);
+
+    max-width: 900px;
+
+    margin: 0 auto;
+
+}
+
+
+
+/* Dashboard Grid */
+
+.dashboard-grid {
+
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+
+    gap: 1rem;
+
+}
+
+
+
+/* Cards */
+
+.dashboard-card {
+
+    background-color: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 16px;
+
+    padding: clamp(0.6rem, 1vw, 1rem);
+
+    min-height: 0;
+    min-width: 0;
+
+    overflow: hidden;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.card-header {
+
+    margin-bottom: 0.5rem;
+
+    text-align: center;
+
+}
+
+
+.card-header h3 {
+
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+
+    margin: 0;
+}
+
+
+.card-body {
+
+    color: var(--text-secondary);
+
+    flex: 1;
+
+    min-height: 0;
+    min-width: 0;
+
+    overflow: hidden;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-start;
+
+    align-items: center;
+
+    overflow-wrap: anywhere;
+
+}
+
+
+
+/* Language Chart */
+
+.languages-body {
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+.languages-body .chart-container {
+
+    width: 80%;
+
+    height: 80%;
+
+}
+
+.languages-body canvas {
+
+    width: 100% !important;
+
+    height: 100% !important;
+
+}
+
+
+
+/* Metrics */
+
+.metrics-grid {
+
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, auto));
+
+    gap: clamp(0.5rem, 1vw, 1rem);
+
+    align-content: center;
+
+}
+
+
+.metric {
+
+    background-color: var(--surface-secondary);
+
+    padding: clamp(0.5rem, 1vw, 1rem);
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    min-width: 0;
+    
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+}
+
+
+.metric span {
+
+    display: block;
+
+    color: var(--text-secondary);
+
+    margin-bottom: 0.5rem;
+
+}
+
+
+.metric strong {
+
+    font-size: clamp(1rem, 2vw, 1.5rem);
+
+}
+
+
+
+/* Health and Insights */
+
+.health-item,
+.score {
+
+    background-color: var(--surface-secondary);
+
+    width: 100%;
+
+    padding: clamp(0.5rem, 1vw, 1rem);
+
+    border-radius: 12px;
+
+    margin-bottom: 0.5rem;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    min-width: 0;
+
+    overflow: hidden;
+
+}
+
+
+.health-card .card-body,
+.insights-card .card-body {
+
+    justify-content: space-evenly;
+
+}
+
+.health-card .health-item,
+.insights-card .score {
+
+    margin-bottom: 0;
+
+}
+
+
+
+/* Language Chart Placeholder */
+
+.chart-container {
+
+    width: min(15vh, 160px);
+    height: min(15vh, 160px);
+
+    flex-shrink: 0;
+
+}

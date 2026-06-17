@@ -1,9 +1,47 @@
+/* Theme */
+
+:root {
+
+    --background: #0d1117;
+
+    --surface: #161b22;
+
+    --surface-secondary: #21262d;
+
+    --border: #30363d;
+
+    --text-primary: #e6edf3;
+
+    --text-secondary: #8b949e;
+
+    --accent: #58a6ff;
+
+}
+
+
+
 /* Global */
 
 * {
+
     box-sizing: border-box;
+
 }
 
 body {
+
     font-family: Arial, sans-serif;
+
+    background-color: var(--background);
+
+    color: var(--text-primary);
+
+    width: 100vw;
+    height: 100vh;
+
+    margin: 0;
+    padding: 1.5rem;
+
+    overflow: hidden;
+
 }
