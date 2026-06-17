@@ -4,18 +4,42 @@
     <meta charset="UTF-8">
 
     <title>
+
         {% block title %}
+
             GitHub Repository Analyzer
+
         {% endblock %}
+
     </title>
+
+    <!-- Global CSS -->
 
     <link
             rel="stylesheet"
-            href="{{ url_for('static', filename='css/styles.css') }}"
+            href="{{ url_for('static', filename='css/base.css') }}"
     >
-</head>
-<body>
-    {% block content %}
+
+    <!-- Page-specific CSS -->
+
+    {% block css %}
+
     {% endblock %}
+
+</head>
+
+<body>
+
+    {% block content %}
+
+    {% endblock %}
+
+    <!-- Page-specific JavaScript -->
+
+    {% block javascript %}
+
+    {% endblock %}
+
 </body>
+
 </html>
