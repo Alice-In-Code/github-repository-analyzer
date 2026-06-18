@@ -20,37 +20,37 @@ GitHub Repository Analyzer
 
 {% block content %}
 
-<h1>GitHub Repository Analyzer</h1>
+<div class="home-page">
 
+    <div class="home-content">
 
-<p>
-    Enter a GitHub repository in the format:
+        <h1>
+            GitHub Repository Analyzer
+        </h1>
 
-    <strong>
-        owner/repository
-    </strong>
+        <!-- Repository search bar -->
+        <form
+                action="/analyze"
+                method="POST"
+                class="search-form"
+        >
 
-</p>
+            <input
+                    type="text"
+                    name="repository"
+                    placeholder="owner/repository"
+                    required
+            >
 
+        </form>
 
-<form
-        action="/analyze"
-        method="POST"
->
+        <p>
+            View repository metrics, health, and insights.
+        </p>
 
-    <input
-            type="text"
-            name="repository"
-            placeholder="owner/repository"
-            required
-    >
+    </div>
 
-
-    <button type="submit">
-        Analyze Repository
-    </button>
-
-</form>
+</div>
 
 {% endblock %}
 
@@ -58,7 +58,7 @@ GitHub Repository Analyzer
 {% block javascript %}
 
 <script
-    src="{{ url_for('static', filename='js/home.js') }}"
+        src="{{ url_for('static', filename='js/home.js') }}"
 >
 </script>
 
