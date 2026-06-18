@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ error_code }} - {{error_title }}
+{% endblock %}
+
+
+{% block css %}
+
+<link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/error.css') }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="error-page">
+
+    <div class="error-card">
+
+        <div class="error-code">
+           Error - {{ error_code }}
+        </div>
+
+        <h1 class="error-title">
+            {{ error_title }}
+        </h1>
+
+        <p class="error-description">
+            {{ error_description }}
+        </p>
+
+        <a href="/"
+           class="home-button">
+            Return Home
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}
