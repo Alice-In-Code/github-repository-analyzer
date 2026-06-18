@@ -3,55 +3,62 @@ Defines application-wide error handlers.
 
 Handles HTTP errors and returns custom error pages for the given error.
 """
-
 from flask import render_template
 from flask.typing import ResponseReturnValue
 
-from werkzeug.exceptions import (
-    BadRequest,
-    NotFound
-)
+from werkzeug.exceptions import HTTPException
 
 
-# Error handlers
+# Error handler
 
-def handle_bad_request(error: BadRequest) -> ResponseReturnValue:
+def handle_http_error(error: HTTPException) -> ResponseReturnValue:
     """
-    Render the bad request page.
+    Handles HTTP errors and renders error template.
 
     Args:
         error:
             Raised Flask exception.
 
     Returns:
-        Rendered 400 error page.
+        Rendered error template.
     """
+
+    status_code = error.code
+
+    if status_code is None:
+        status_code = 500
 
     return (
         render_template(
-            "errors/400.html",
+            "errors/error.html",
+            error_code=status_code,
+            error_title=error.name,
             error_description=error.description
         ),
-        400
+        status_code
     )
 
 
-def handle_not_found(error: NotFound) -> ResponseReturnValue:
+def handle_internal_error(_error: Exception) -> ResponseReturnValue:
     """
-    Render the not found page.
+    Handles unexpected application exception and renders error template.
 
     Args:
-        error:
-            Raised Flask exception.
+        _error:
+            Unexpected application exception.
 
     Returns:
-        Rendered 404 error page.
+        Rendered error template.
     """
+
+    ERROR_CODE = 500
 
     return (
         render_template(
-            "errors/404.html",
-            error_description=error.description
+            "errors/error.html",
+            error_code=ERROR_CODE,
+            error_title="Internal Server Error",
+            error_description="An unexpected error occurred."
         ),
-        404
+        ERROR_CODE
     )
