@@ -287,17 +287,25 @@
 
 .languages-body {
 
+    flex-direction: row;
+
     justify-content: center;
 
     align-items: center;
+
+    gap: 1rem;
 
 }
 
 .languages-body .chart-container {
 
-    width: 80%;
+    flex: 1;
 
-    height: 80%;
+    min-width: 0;
+
+    height: 100%;
+
+    min-height: 150px;
 
 }
 
@@ -309,6 +317,47 @@
 
 }
 
+.language-legend {
+
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 0.5rem;
+
+}
+
+.legend-item {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 0.75rem;
+
+    text-align: center;
+
+}
+
+.legend-color {
+    width: 14px;
+
+    height: 14px;
+
+    border-radius: 4px;
+
+    flex-shrink: 0;
+}
 
 
 /* Metrics */
@@ -410,18 +459,5 @@
 .activity-card .activity {
 
     margin-bottom: 0;
-
-}
-
-
-
-/* Language Chart Placeholder */
-
-.chart-container {
-
-    width: min(15vh, 160px);
-    height: min(15vh, 160px);
-
-    flex-shrink: 0;
 
 }
