@@ -11,6 +11,54 @@ import pytest
 from src.app import create_app
 
 
+# Mock repository results
+def mock_analysis_result():
+    return {
+        "repository": {
+            "name": "repository",
+            "full_name": "owner/repository",
+            "description": "Test repository",
+
+            "default_branch": "main",
+
+            "created_at": "0000-00-00T00:00:00Z",
+            "pushed_at": "0000-00-00T00:00:00Z",
+            "updated_at": "0000-00-00t00:00:00Z",
+
+            "size": 0,
+
+            "archived": False,
+
+            "license": None,
+
+            "stargazers_count": 0,
+            "subscribers_count": 0,
+            "forks_count": 0,
+
+            "owner": {
+                "login": "owner",
+                "avatar_url": ""
+            }
+        },
+
+        "issues": {
+            "open": 0,
+            "closed": 0
+        },
+
+        "pull_requests": {
+            "open": 0,
+            "closed": 0
+        },
+
+        "repository_size": {
+            "value": 0,
+            "unit": "KB"
+        }
+    }
+
+
+
 def test_homepage_loads() -> None:
     """
     Verify homepage loads successfully.
@@ -123,26 +171,7 @@ def test_github_url_input_is_normalized(
             List of non-normalized GitHub links for repository input.
     """
 
-    mock_analyze.return_value = {
-        "repository": {
-            "name": "repository"
-        },
-
-        "issues": {
-            "open": 1,
-            "closed": 1
-        },
-
-        "pull-request": {
-            "open": 1,
-            "closed": 1
-        },
-
-        "repository_size": {
-            "value": 1,
-            "unit": "KB"
-        }
-    }
+    mock_analyze.return_value = mock_analysis_result()
 
     app = create_app()
 
@@ -209,26 +238,7 @@ def test_owner_repository_input_returns_200(mock_analyze) -> None:
             Mock object used to verify the external call returns 200 response.
     """
 
-    mock_analyze.return_value = {
-        "repository": {
-            "name": "repository"
-        },
-
-        "issues": {
-            "open": 1,
-            "closed": 1
-        },
-
-        "pull-request": {
-            "open": 1,
-            "closed": 1
-        },
-
-        "repository_size": {
-            "value": 1,
-            "unit": "KB"
-        }
-    }
+    mock_analyze.return_value = mock_analysis_result()
 
     app = create_app()
 
