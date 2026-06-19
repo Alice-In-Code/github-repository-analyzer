@@ -7,7 +7,8 @@ from unittest.mock import Mock, patch
 from src.services.github.repository_api import (
     get_repository,
     get_repository_items_count,
-    get_pull_requests_count
+    get_pull_requests_count,
+    get_repository_languages,
 )
 
 
@@ -42,11 +43,11 @@ def test_get_repository_success(mock_get: Mock) -> None:
 @patch("src.services.github.repository_api.requests.get")
 def test_get_repository_not_found(mock_get: Mock) -> None:
     """
-        Verify None is returned for a missing repository.
+    Verify None is returned for a missing repository.
 
-        Args:
-            mock_get:
-                Mock object used to verify the external call returns None for a missing repository.
+    Args:
+        mock_get:
+            Mock object used to verify the external call returns None for a missing repository.
     """
 
     mock_response = Mock()
@@ -65,11 +66,11 @@ def test_get_repository_not_found(mock_get: Mock) -> None:
 @patch("src.services.github.repository_api.requests.get")
 def test_get_repository_items_count_success(mock_get: Mock) -> None:
     """
-        Verify repository items count is successful.
+    Verify repository items count is successful.
 
-        Args:
-            mock_get:
-                Mock object used to verify the external call successfully returns items count.
+    Args:
+        mock_get:
+            Mock object used to verify the external call successfully returns items count.
     """
 
     response = Mock()
@@ -95,11 +96,11 @@ def test_get_repository_items_count_success(mock_get: Mock) -> None:
 @patch("src.services.github.repository_api.requests.get")
 def test_get_pull_requests_count_success(mock_get: Mock) -> None:
     """
-        Verify repository items count is successful.
+    Verify repository pull request count is successful.
 
-        Args:
-            mock_get:
-                Mock object used to verify the external call successfully returns pull request count.
+    Args:
+        mock_get:
+            Mock object used to verify the external call successfully returns pull request count.
     """
 
     response = Mock()
@@ -121,3 +122,36 @@ def test_get_pull_requests_count_success(mock_get: Mock) -> None:
     )
 
     assert result == 2
+
+
+
+@patch("src.services.github.repository_api.requests.get")
+def test_get_repository_languages_success(mock_get: Mock) -> None:
+    """
+    Verify used repository languages is successful.
+
+    Args:
+        mock_get:
+            Mock object used to verify the external call successfully returns used languages in repository.
+    """
+
+    response = Mock()
+
+    response.status_code = 200
+
+    response.json.return_value = {
+        "Python": 0,
+        "HTML": 0
+    }
+
+    mock_get.return_value = response
+
+    result = get_repository_languages(
+        "owner/repository"
+    )
+
+    mock_get.assert_called_once_with(
+        "https://api.github.com/repos/owner/repository/languages"
+    )
+
+    assert result["Python"] == 0

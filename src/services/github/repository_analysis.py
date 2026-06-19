@@ -13,6 +13,7 @@ from src.services.github.repository_api import (
     get_repository_items_count,
     get_pull_requests_count,
     get_repository_size,
+    get_repository_languages,
 )
 
 
@@ -53,6 +54,12 @@ def analyze_repository(repository_name: str) -> dict[str, Any] | None:
         "closed"
     )
 
+    languages = simplify_languages(
+        get_repository_languages(
+            repository_name
+        )
+    )
+
     return {
         "repository": repository,
 
@@ -70,6 +77,47 @@ def analyze_repository(repository_name: str) -> dict[str, Any] | None:
             "closed": closed_prs
             },
 
-        "repository_size": get_repository_size(repository)
+        "repository_size": get_repository_size(repository),
+
+        "languages": languages
 
         }
+
+
+def simplify_languages(languages: dict[str, int]) -> dict[str, int]:
+    """
+    Simplify languages pie chart by labeling minimal languages "other".
+
+    Args:
+        languages:
+            Dictionary of languages used in repository.
+
+    Returns:
+        Simplified dictionary of languages used in repository with their percent usage.
+    """
+
+    if not languages:
+        return {}
+
+    total = sum(languages.values())
+
+    result = {}
+
+    other = 0
+
+    for language, bytes_count in languages.items():
+
+        percentage = (
+            bytes_count / total
+        ) * 100
+
+        if percentage < 1:
+            other += bytes_count
+
+        else:
+            result[language] = bytes_count
+
+    if other:
+        result["Other"] = other
+
+    return result

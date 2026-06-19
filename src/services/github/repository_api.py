@@ -184,3 +184,23 @@ def get_repository_size(repository: dict[str, Any]) -> dict[str, int | float | s
     }
 
 
+def get_repository_languages(repository_name: str) -> dict[str, int]:
+    """
+    Fetch repository languages usage.
+
+    Args:
+        repository_name:
+            Name of the GitHub repository (owner/repository).
+
+    Returns:
+        Dictionary mapping language names to byte counts.
+    """
+
+    url = f"{BASE_URL}/{repository_name}/languages"
+
+    response = requests.get(url)
+
+    if response.status_code != 200:
+        return {}
+
+    return response.json()
