@@ -1,0 +1,67 @@
+<article class="dashboard-card activity-card">
+
+
+    <header class="card-header">
+
+        <h3>
+            Activity
+        </h3>
+
+    </header>
+
+
+    <div class="card-body">
+
+
+        <div class="activity">
+
+            Default branch
+
+            <strong>
+                {{ repository.default_branch }}
+            </strong>
+
+        </div>
+
+
+        <div class="activity">
+
+            Last push
+
+            <strong>
+                {{ repository.pushed_at[:10] }}
+            </strong>
+
+        </div>
+
+
+        <div class="activity">
+
+            <span>
+                Issue Count
+            </span>
+
+            <strong>
+                Open: {{ issues.open }} | Closed: {{ issues.closed }}
+            </strong>
+
+        </div>
+
+
+        <div class="activity">
+
+            <span>
+                PR Count
+            </span>
+
+            <strong>
+                Open: {{ pull_requests.open }} | Closed: {{ pull_requests.closed }}
+            </strong>
+
+        </div>
+
+
+    </div>
+
+
+</article>

@@ -1,0 +1,64 @@
+<article class="dashboard-card status-card">
+
+
+    <header class="card-header">
+
+        <h3>
+            Repository Status
+        </h3>
+
+    </header>
+
+
+    <div class="card-body">
+
+
+        <div class="status-item">
+
+            Created
+
+            <strong>
+                {{ repository.created_at[:10] }}
+            </strong>
+
+        </div>
+
+
+        <div class="status-item">
+
+            Updated
+
+            <strong>
+                {{ repository.updated_at[:10] }}
+            </strong>
+
+        </div>
+
+
+        <div class="status-item">
+
+            License
+
+            <strong>
+                {{ repository.license.name if repository.license else "None" }}
+            </strong>
+
+        </div>
+
+
+        <div class="status-item">
+
+            Archived
+
+            <strong>
+                {{ "Yes" if repository.archived else "No" }}
+            </strong>
+
+
+        </div>
+
+
+    </div>
+
+
+</article>
