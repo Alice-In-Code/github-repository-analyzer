@@ -31,6 +31,19 @@
         <div class="metric">
 
             <span>
+                Watchers
+            </span>
+
+            <strong>
+                {{ repository.subscribers_count }}
+            </strong>
+
+        </div>
+
+
+        <div class="metric">
+
+            <span>
                 Forks
             </span>
 
@@ -41,30 +54,19 @@
         </div>
 
 
-        <div class="metric">
-
-            <span>
-                Watchers
-            </span>
-
-            <strong>
-                -
-            </strong>
-
-        </div>
-
 
         <div class="metric">
 
             <span>
-                Issues
+                Repository Size
             </span>
 
             <strong>
-                -
+                {{ "N/A" if repository_size.unit == "N/A" else repository_size.value ~ " " ~ repository_size.unit }}
             </strong>
 
         </div>
+
 
 
     </div>
