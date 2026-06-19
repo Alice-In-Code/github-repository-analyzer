@@ -13,7 +13,13 @@ from src.services.github.repository_api import (
 
 @patch("src.services.github.repository_api.requests.get")
 def test_get_repository_success(mock_get: Mock) -> None:
-    """Verify repository data is returned for a valid repository."""
+    """
+        Verify repository data is returned for a valid repository.
+
+        Args:
+            mock_get:
+                Mock object used to verify the external call returns repository data for a valid repository.
+    """
 
     mock_response = Mock()
 
@@ -35,7 +41,13 @@ def test_get_repository_success(mock_get: Mock) -> None:
 
 @patch("src.services.github.repository_api.requests.get")
 def test_get_repository_not_found(mock_get: Mock) -> None:
-    """Verify None is returned for a missing repository."""
+    """
+        Verify None is returned for a missing repository.
+
+        Args:
+            mock_get:
+                Mock object used to verify the external call returns None for a missing repository.
+    """
 
     mock_response = Mock()
 
