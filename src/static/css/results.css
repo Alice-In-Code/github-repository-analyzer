@@ -373,10 +373,10 @@
 
 
 
-/* Health and Insights */
+/* Status and Activity */
 
-.health-item,
-.score {
+.status-item,
+.activity {
 
     background-color: var(--surface-secondary);
 
@@ -399,15 +399,15 @@
 }
 
 
-.health-card .card-body,
-.insights-card .card-body {
+.status-card .card-body,
+.activity-card .card-body {
 
     justify-content: space-evenly;
 
 }
 
-.health-card .health-item,
-.insights-card .score {
+.status-card .status-item,
+.activity-card .activity {
 
     margin-bottom: 0;
 
