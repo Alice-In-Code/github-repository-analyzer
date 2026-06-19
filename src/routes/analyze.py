@@ -12,7 +12,7 @@ from flask import (
 )
 from flask.typing import ResponseReturnValue
 
-from src.services.github.repository_api import get_repository
+from src.services.github.repository_analysis import analyze_repository
 from src.services.github.repository_input import parse_repository_input
 from src.services.github.repository_normalizer import RepositoryNormalizationError
 
@@ -49,9 +49,9 @@ def analyze() -> ResponseReturnValue:
     except RepositoryNormalizationError as e:
         abort(400, description=str(e))
 
-    repository = get_repository(repository_name)
+    analysis = analyze_repository(repository_name)
 
-    if repository is None:
+    if analysis is None:
         abort(
             404,
             description=f'Repository "{repository_name}" could not be found.'
@@ -59,5 +59,5 @@ def analyze() -> ResponseReturnValue:
 
     return render_template(
         "results.html",
-        repository=repository
+        **analysis
     )
