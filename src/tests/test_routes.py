@@ -65,7 +65,6 @@ def test_missing_repository_input_returns_400(repository_input: str) -> None:
         )
 
     assert response.status_code == 400
-    print(response.data.decode())
     assert b"Repository input is required" in response.data
 
 
