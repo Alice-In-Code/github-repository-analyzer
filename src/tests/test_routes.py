@@ -24,11 +24,18 @@ def test_homepage_loads() -> None:
     assert response.status_code == 200
 
 
-@patch("src.routes.analyze.get_repository")
-def test_repository_not_found_returns_404(mock_get) -> None:
-    """Verify missing repositories return a 404 response."""
+@patch("src.routes.analyze.analyze_repository")
+def test_repository_not_found_returns_404(mock_analyze) -> None:
+    """
+    Verify missing repositories return a 404 response.
 
-    mock_get.return_value = None
+    Args:
+        mock_analyze:
+            Mock object used to verify the external call returns 404 response.
+
+    """
+
+    mock_analyze.return_value = None
 
     app = create_app()
 
@@ -52,7 +59,13 @@ def test_repository_not_found_returns_404(mock_get) -> None:
     ]
 )
 def test_missing_repository_input_returns_400(repository_input: str) -> None:
-    """Verify empty repository input returns a 400 response."""
+    """
+    Verify empty repository input returns a 400 response.
+
+    Args:
+        repository_input:
+            List of empty and whitespaces for repository input.
+    """
 
     app = create_app()
 
@@ -94,14 +107,42 @@ def test_invalid_repository_input_returns_400() -> None:
         "www.github.com/owner/repository",
     ]
 )
-@patch("src.routes.analyze.get_repository")
+@patch("src.routes.analyze.analyze_repository")
 def test_github_url_input_is_normalized(
-        mock_get,
+        mock_analyze,
         repository_input: str
 ) -> None:
-    """Verify GitHub repository URL inputs are normalized before API request."""
+    """
+    Verify GitHub repository URL inputs are normalized before API request.
 
-    mock_get.return_value = {"name": "repository"}
+    Args:
+        mock_analyze:
+            Mock object used to verify the external analysis call is made with the expected normalized input.
+
+        repository_input:
+            List of non-normalized GitHub links for repository input.
+    """
+
+    mock_analyze.return_value = {
+        "repository": {
+            "name": "repository"
+        },
+
+        "issues": {
+            "open": 1,
+            "closed": 1
+        },
+
+        "pull-request": {
+            "open": 1,
+            "closed": 1
+        },
+
+        "repository_size": {
+            "value": 1,
+            "unit": "KB"
+        }
+    }
 
     app = create_app()
 
@@ -115,7 +156,7 @@ def test_github_url_input_is_normalized(
 
     assert response.status_code == 200
 
-    mock_get.assert_called_once_with(
+    mock_analyze.assert_called_once_with(
         "owner/repository"
     )
 
@@ -137,7 +178,13 @@ def test_github_url_input_is_normalized(
     ]
 )
 def test_github_url_without_repository_400(repository_input: str) -> None:
-    """Verify incomplete GitHub repository URLs return 400 Error."""
+    """
+    Verify incomplete GitHub repository URLs return 400 Error.
+
+    Args:
+        repository_input:
+            List of GitHub URLs without repositories for repository input.
+    """
 
     app = create_app()
 
@@ -152,12 +199,35 @@ def test_github_url_without_repository_400(repository_input: str) -> None:
     assert response.status_code == 400
 
 
-@patch("src.routes.analyze.get_repository")
-def test_owner_repository_input_returns_200(mock_get) -> None:
-    """Verify 'owner/repository' input is accepted and returns 200."""
+@patch("src.routes.analyze.analyze_repository")
+def test_owner_repository_input_returns_200(mock_analyze) -> None:
+    """
+    Verify 'owner/repository' input is accepted and returns 200.
 
-    mock_get.return_value = {
-        "name": "repository"
+    Args:
+        mock_analyze:
+            Mock object used to verify the external call returns 200 response.
+    """
+
+    mock_analyze.return_value = {
+        "repository": {
+            "name": "repository"
+        },
+
+        "issues": {
+            "open": 1,
+            "closed": 1
+        },
+
+        "pull-request": {
+            "open": 1,
+            "closed": 1
+        },
+
+        "repository_size": {
+            "value": 1,
+            "unit": "KB"
+        }
     }
 
     app = create_app()
@@ -172,6 +242,6 @@ def test_owner_repository_input_returns_200(mock_get) -> None:
 
     assert response.status_code == 200
 
-    mock_get.assert_called_once_with(
+    mock_analyze.assert_called_once_with(
         "owner/repository"
     )
