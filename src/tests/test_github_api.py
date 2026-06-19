@@ -42,11 +42,11 @@ def test_get_repository_success(mock_get: Mock) -> None:
 @patch("src.services.github.repository_api.requests.get")
 def test_get_repository_not_found(mock_get: Mock) -> None:
     """
-        Verify None is returned for a missing repository.
+    Verify None is returned for a missing repository.
 
-        Args:
-            mock_get:
-                Mock object used to verify the external call returns None for a missing repository.
+    Args:
+        mock_get:
+            Mock object used to verify the external call returns None for a missing repository.
     """
 
     mock_response = Mock()
@@ -65,11 +65,11 @@ def test_get_repository_not_found(mock_get: Mock) -> None:
 @patch("src.services.github.repository_api.requests.get")
 def test_get_repository_items_count_success(mock_get: Mock) -> None:
     """
-        Verify repository items count is successful.
+    Verify repository items count is successful.
 
-        Args:
-            mock_get:
-                Mock object used to verify the external call successfully returns items count.
+    Args:
+        mock_get:
+            Mock object used to verify the external call successfully returns items count.
     """
 
     response = Mock()
@@ -95,11 +95,11 @@ def test_get_repository_items_count_success(mock_get: Mock) -> None:
 @patch("src.services.github.repository_api.requests.get")
 def test_get_pull_requests_count_success(mock_get: Mock) -> None:
     """
-        Verify repository items count is successful.
+    Verify repository pull request count is successful.
 
-        Args:
-            mock_get:
-                Mock object used to verify the external call successfully returns pull request count.
+    Args:
+        mock_get:
+            Mock object used to verify the external call successfully returns pull request count.
     """
 
     response = Mock()
