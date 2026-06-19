@@ -11,8 +11,13 @@ import pytest
 from src.app import create_app
 
 
-# Mock repository results
 def mock_analysis_result():
+    """
+    Helper function which returns mock repository analysis results used for test inputs.
+
+    Returns:
+        Mock analysis repository results.
+    """
     return {
         "repository": {
             "name": "repository",
