@@ -59,6 +59,12 @@ def mock_analysis_result():
         "repository_size": {
             "value": 0,
             "unit": "KB"
+        },
+
+        "languages": {
+            "Python": 0,
+            "HTML": 0,
+            "CSS": 0
         }
     }
 
