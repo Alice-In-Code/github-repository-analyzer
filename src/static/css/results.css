@@ -103,8 +103,8 @@
 
 .owner-avatar {
 
-    width: clamp(70px, 10vh, 130px);
-    height: clamp(70px, 10vh, 130px);
+    width: 50%;
+    height: 25%;
 
     border-radius: 50%;
 

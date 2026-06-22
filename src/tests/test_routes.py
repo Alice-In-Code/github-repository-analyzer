@@ -46,6 +46,16 @@ def mock_analysis_result():
             }
         },
 
+        "owner": {
+            "login": "owner",
+            "name": "Owner Name",
+            "bio": "Test owner bio",
+            "avatar_url": "GitHub avatar URL",
+            "followers": 0,
+            "following": 0,
+            "public_repos": 0,
+        },
+
         "issues": {
             "open": 0,
             "closed": 0
@@ -266,3 +276,77 @@ def test_owner_repository_input_returns_200(mock_analyze) -> None:
     mock_analyze.assert_called_once_with(
         "owner/repository"
     )
+
+
+@patch("src.routes.analyze.analyze_repository")
+def test_owner_panel_renders_owner_information(mock_analyze) -> None:
+    """
+    Verify owner information is rendered in the owner panel.
+
+    Args:
+        mock_analyze:
+            Mock object used to verify the external call returns repository owner information.
+    """
+
+    mock_analyze.return_value = mock_analysis_result()
+
+    app = create_app()
+
+    with app.test_client() as client:
+        response = client.post(
+            "/analyze",
+            data={
+                "repository": "owner/repository"
+            }
+        )
+
+    assert response.status_code == 200
+
+    # Owner identity
+    assert b"Owner Name" in response.data
+    assert b"Test owner bio" in response.data
+
+    # Owner stats
+    assert b"Followers" in response.data
+    assert b"0" in response.data
+
+    assert b"Following" in response.data
+    assert b"0" in response.data
+
+    assert b"Public Repositories" in response.data
+    assert b"0" in response.data
+
+    # Avatar
+    assert b"GitHub avatar URL" in response.data
+
+
+@patch("src.routes.analyze.analyze_repository")
+def test_owner_panel_handles_missing_owner(mock_analyze) -> None:
+    """
+    Verify owner panel renders safely when owner data is unavailable.
+
+    Args:
+        mock_analyze:
+            Mock object used to verify the external call returns placeholder repository owner information.
+    """
+
+    analysis = mock_analysis_result()
+
+    analysis["owner"]["name"] = ""
+    analysis["owner"]["login"] = ""
+
+    mock_analyze.return_value = analysis
+
+    app = create_app()
+
+    with app.test_client() as client:
+        response = client.post(
+            "/analyze",
+            data={
+                "repository": "owner/repository"
+            }
+        )
+
+    assert response.status_code == 200
+
+    assert b"N/A" in response.data
