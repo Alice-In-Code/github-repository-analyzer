@@ -24,22 +24,18 @@
 
         <img
             class="owner-avatar"
-            src=""
-            alt="Repository owner avatar"
+            src="{{ owner.avatar_url }}"
+            alt="{{ owner.login }} avatar"
         >
 
 
         <h2 class="owner-name">
-
-            Repository Owner
-
+            {{ owner.name or owner.login }}
         </h2>
 
 
         <p class="owner-bio">
-
-            Owner information will appear here.
-
+            {{ owner.bio or "No bio provided." }}
         </p>
 
 
@@ -53,7 +49,7 @@
                 </span>
 
                 <strong>
-                    -
+                    {{ owner.followers }}
                 </strong>
 
             </div>
@@ -66,23 +62,8 @@
                     Following
                 </span>
 
-                <span>
-                    -
-                </span>
-
-            </div>
-
-
-            <div class="owner-stat">
-
-
-                <span>
-                    Public Repositories
-                </span>
-
-
                 <strong>
-                    -
+                    {{ owner.following }}
                 </strong>
 
             </div>
