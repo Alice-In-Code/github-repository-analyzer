@@ -14,6 +14,7 @@ from src.services.github.repository_api import (
     get_pull_requests_count,
     get_repository_size,
     get_repository_languages,
+    get_user,
 )
 
 
@@ -33,6 +34,8 @@ def analyze_repository(repository_name: str) -> dict[str, Any] | None:
 
     if repository is None:
         return None
+
+    owner = get_user(repository["owner"]["login"])
 
     open_issues = get_repository_items_count(
         repository_name,
@@ -62,6 +65,8 @@ def analyze_repository(repository_name: str) -> dict[str, Any] | None:
 
     return {
         "repository": repository,
+
+        "owner": owner,
 
         "issues": {
 
