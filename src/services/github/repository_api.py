@@ -204,3 +204,25 @@ def get_repository_languages(repository_name: str) -> dict[str, int]:
         return {}
 
     return response.json()
+
+
+def get_user(username: str) -> dict[str, Any] | None:
+    """
+    Fetch GitHub user data.
+
+    Args:
+        username:
+            Username of the repository owner.
+
+    Returns:
+        Dictionary of user information.
+    """
+
+    url = f"https://api.github.com/users/{username}"
+
+    response = requests.get(url)
+
+    if response.status_code != 200:
+        return None
+
+    return response.json()
