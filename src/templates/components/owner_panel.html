@@ -30,7 +30,7 @@
 
 
         <h2 class="owner-name">
-            {{ owner.name or owner.login }}
+            {{ owner.name or owner.login or "N/A" }}
         </h2>
 
 
@@ -64,6 +64,19 @@
 
                 <strong>
                     {{ owner.following }}
+                </strong>
+
+            </div>
+
+            <div class="owner-stat">
+
+
+                <span>
+                    Public Repositories
+                </span>
+
+                <strong>
+                    {{ owner.public_repos }}
                 </strong>
 
             </div>
